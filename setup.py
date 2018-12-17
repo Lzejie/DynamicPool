@@ -10,13 +10,13 @@ from setuptools import setup, find_packages
 setup(
     name="DynamicPool",
     packages=find_packages(),
-    version='0.1',
-    description="动态任务阻塞线程池",
+    version='0.13',
+    description="动态任务阻塞线程/进程池",
     author="L_zejie",
     author_email='lzj_xuexi@163.com',
     url="https://github.com/Lzejie/DynamicPool",
     license="MIT Licence",
-    keywords=["Thread Pool", "Dynamic Pool", "Dynamic Thread Pool"],
+    keywords=["Thread Pool", "Dynamic Pool", "Dynamic Thread Pool", "Dynamic Process Pool"],
     classifiers=[],
     install_requires=[]
 )

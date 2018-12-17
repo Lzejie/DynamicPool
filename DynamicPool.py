@@ -2,12 +2,13 @@
 # @Time    : 18/12/10 上午10:35
 # @Author  : Edward
 # @Site    :
-# @File    : ThreadPool.py
+# @File    : DynamicPool.py
 # @Software: PyCharm Community Edition
 
 import time
 
 from threading import Thread
+from multiprocessing import Process
 
 
 class Pool(object):
@@ -15,11 +16,12 @@ class Pool(object):
     阻塞动态线程池。
     创建完线程池后，可以动态地往里面丢任务。不用预先构建完要执行的任务，可以边执行边添加。
     '''
-    def __init__(self, size=10, check_interval=0.1):
+    def __init__(self, size=10, check_interval=0.1, multiprocess=False):
         self.workers = []
         self.worker_size = size
         # 监测时间间隔
         self.check_interval = check_interval
+        self.worker_type = Process if multiprocess else Thread
 
     # 添加一个新的任务
     def add_task(self, func, args):
@@ -31,7 +33,7 @@ class Pool(object):
             else:
                 break
 
-        new_thread = Thread(target=func, args=args)
+        new_thread = self.worker_type(target=func, args=args)
         self.workers.append(new_thread)
         new_thread.start()
 
@@ -53,7 +55,8 @@ class Pool(object):
 
 
 if __name__ == '__main__':
-    pool = Pool(5)
+    # pool = Pool(5)
+    pool = Pool(5, multiprocess=True)
     pp = lambda x: time.sleep(2) or print(x)
 
     for i in range(10):
