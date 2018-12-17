@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 setup(
     name="DynamicPool",
     packages=find_packages(),
-    version='0.13',
+    version='0.14',
     description="动态任务阻塞线程/进程池",
     author="L_zejie",
     author_email='lzj_xuexi@163.com',
